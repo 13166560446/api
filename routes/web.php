@@ -52,3 +52,9 @@ Route::get('/test/jiekou','Api\TestController@test');
 Route::post('/test/reg','Api\TestController@reg');
 Route::post('/test/login','Api\TestController@login');
 Route::get('/test/list','Api\TestController@userlist')->middleware('filtrate');
+
+
+
+
+//签名
+Route::get('/test/check','TestController@md5test');

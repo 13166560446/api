@@ -97,4 +97,26 @@ class TestController extends Controller
         echo 'count: '.$count;
 
     }
+
+
+
+
+    //测试接口
+
+
+    public function md5test(){
+        //发送的数据
+        $data='yyp';  //要发送的数据
+        $key='1905';
+        //计算签名
+        $signature=md5($data.$key);
+        echo "待发送的数据：". $data;echo '</br>';
+        echo "发送端的签名：".$signature;echo '</br>';
+
+        //发送数据
+        $url='http://passport.1905.com/index/check?data='.$data.'&signature='.$signature;
+        //echo $url;echo '<hr>';
+        $response=file_get_contents($url);
+        echo $response;
+    }
 }
