@@ -59,3 +59,4 @@ Route::get('/test/list','Api\TestController@userlist')->middleware('filtrate');
 //签名
 Route::get('/test/check','TestController@md5test');
 Route::get('/test/check2','TestController@check2');
+
