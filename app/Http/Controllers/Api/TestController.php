@@ -119,4 +119,33 @@ class TestController extends Controller
         $response=file_get_contents($url);
         echo $response;
     }
+
+    public function check2()
+    {
+        $key = "1905";          
+
+        //待签名的数据
+        $order_info = [
+            "name"          => 'yyp',
+            "order_amount"  => mt_rand(111,999),
+            "add_time"      => time(),
+        ];
+        $data_json = json_encode($order_info);
+        //计算签名
+        $sign = md5($data_json.$key);
+        // post 表单（form-data）发送数据
+        $client = new Client();
+        $url = 'http://passport.1905.com/index/check2';
+        $response = $client->request("POST",$url,[
+            "form_params"   => [
+                "data"  => $data_json,
+                "sign"  => $sign
+            ]
+        ]);
+
+        //接收服务器端响应的数据
+        $response_data = $response->getBody();
+        echo $response_data;
+
+    }
 }
