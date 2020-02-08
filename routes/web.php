@@ -60,3 +60,7 @@ Route::get('/test/list','Api\TestController@userlist')->middleware('filtrate');
 Route::get('/test/check','TestController@md5test');
 Route::get('/test/check2','TestController@check2');
 
+//加密
+Route::get('/test/check3','TestController@check3');
+Route::get('/test/checkdo','TestController@checkdo');
+

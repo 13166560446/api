@@ -149,4 +149,33 @@ class TestController extends Controller
 
         
     }
+    //加密
+    public function check3(){
+       
+        $data='Hello Word';
+        $method='AES-256-CBC';
+        $key='1905api';
+        $iv='asdasdasdas12345';
+
+        $enc_data=openssl_encrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
+        echo "加密后密文: ".$enc_data;echo '</br>';
+        echo '<hr>';
+        $url="http://api.com/test/checkdo?data=".base64_encode($enc_data);
+        echo $url;
+        echo "<br>";
+        $response=file_get_contents($url);
+        echo $response;
+    }
+    //解密
+    public function checkdo(){
+        $data=base64_decode($_GET['data']);
+        $method='AES-256-CBC';
+        $key='1905api';
+        $iv='asdasdasdas12345';
+
+        $dec_data=openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
+        echo '解密:'. $dec_data;
+    }
+
+
 }
