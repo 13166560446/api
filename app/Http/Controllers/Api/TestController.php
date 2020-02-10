@@ -177,5 +177,27 @@ class TestController extends Controller
         echo '解密:'. $dec_data;
     }
 
+    //使用私钥对数据加密
+    public function check4(){
+        $priv_key=file_get_contents(storage_path('keys/priv.key'));
+//        echo $priv_key;
+        echo '<hr>';
+        $data='Hello World';
+        echo "待加密数据:  ".$data;echo '<br>';
+        openssl_private_encrypt($data,$enc_data,$priv_key);
+        var_dump($enc_data);
+
+        //将密文 发送至 对方
+        $base64_encode_str=base64_encode($enc_data); //密文经 base64 编码
+        echo $base64_encode_str;
+        echo "<hr>";
+        $url='http://server.com/rsa2?data='.urlencode($base64_encode_str);
+        $response=file_get_contents($url);
+        echo $response;
+        //解密
+       $pub_key=file_get_contents(storage_path('keys/pub.key'));
+       openssl_public_decrypt($enc_data,$dec_data,$pub_key);
+       echo "解密数据 :".$dec_data;echo '<br>';
+    }
 
 }

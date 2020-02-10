@@ -64,3 +64,5 @@ Route::get('/test/check2','TestController@check2');
 Route::get('/test/check3','TestController@check3');
 Route::get('/test/checkdo','TestController@checkdo');
 
+Route::get('/test/check4','TestController@check4');
+
